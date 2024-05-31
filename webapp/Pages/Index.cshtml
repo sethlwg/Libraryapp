@@ -1,0 +1,46 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome to LWG Library</h1>
+</div>
+
+<form method ="get">
+    <div class = "form-group">
+        <label for="search"> Search for Books:</label>
+        <input type="text" name="search" id="search" class="form-control" value="@Model.SearchTerm"
+    </div>
+    <button type="submit" class="btn btn-primary">Search</button>
+
+</form>
+
+@if(Model.Books != null && Model.Books.Any()) {
+    <table class = "table">
+        <thead> 
+            <tr> 
+                <th>Title</th>
+                <th>Author</th>
+                <th>Year</th>
+                <th></th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var book in Model.Books)
+            {
+                <tr> 
+                    <td>@book.Title</td>
+                    <td>@book.Author</td>
+                    <td>@book.Year</td>
+
+                    <td>
+                        <a href="/Books/Details?id=@book.Id" class="btn btn-info">Details</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
